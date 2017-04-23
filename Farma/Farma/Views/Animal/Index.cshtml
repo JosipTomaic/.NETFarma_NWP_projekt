@@ -1,0 +1,97 @@
+﻿@model  PagedList.IPagedList<Farma.Models.Stoka>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Index";
+}
+@{ 
+    var brojZivotinja = 0;
+    foreach(var item in Model)
+    {
+        brojZivotinja++;
+    }
+
+    if(brojZivotinja == 0)
+    {
+        <div class="container">
+            <div class="row">
+                <h4>Trenutno nemate životinja na farmi ili pretraživanje nije dalo rezultata.</h4>
+                <h5>Kliknite na Dodaj životinju kako bi ste dodali životinju.</h5>
+            </div>
+            <div class="row">
+                @Html.ActionLink("Dodaj životinju", "OtvoriFormu", "Animal")
+                @Html.ActionLink("Natrag na listu", "Index", "Animal")
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="container">
+            <div class="row">
+                <h4>Popis svih životinja</h4>
+                @Html.ActionLink("Dodaj životinju", "OtvoriFormu", "Animal")
+            </div>
+            <div class="row">
+                @using (Html.BeginForm("Index", "Animal", FormMethod.Get))
+                {
+                    <p>
+                        Tražilica: @Html.TextBox("searchString", ViewBag.TrenutniFilter as string)
+                        <input type="submit" value="Pretraži" />
+                    </p>
+                }
+            </div>
+            <div class="row">
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.ActionLink("Vrsta", "Index", new { sortOrder = ViewBag.VrstaSort })
+                        </th>
+                        <th>
+                            @Html.ActionLink("Starost u godinama", "Index", new { sortOrder = ViewBag.StarostSort })
+                        </th>
+                        <th>
+                            @Html.ActionLink("Tezina u kilogramima", "Index", new { sortOrder = ViewBag.TezinaSort })
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Nadimak)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model[0].Boja)
+                        </th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Vrsta)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Starost)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tezina)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nadimak)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Boja)
+                            </td>
+                            <td>
+                                <p>
+                                    @Html.ActionLink("Uredi", "UrediZivotinju", new { id = item.ID }) |
+                                    @Html.ActionLink("Detalji", "PrikaziDetalje", new { id = item.ID }) |
+                                    @Html.ActionLink("Obrisi", "ObrisiZivotinju", new { id = item.ID }) |
+                                </p>
+                            </td>
+                        </tr>
+                    }
+                </table>
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                new { page, sortOrder = ViewBag.TrenutniSort, currentFilter = ViewBag.TrenutniFilter }))
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,121 @@
+﻿@model Farma.Models.Stroj
+@{
+    ViewBag.Title = "Koristi Stroj";
+}
+@{ var koristenje = Model.Upotreba;}
+@if (koristenje)
+{
+    <h3>Da li ste sigurni da želite prestati koristiti ovaj stroj?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Naziv)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Marka)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Marka)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Model)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Model)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Svrha)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Svrha)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GodisnjeDoba)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GodisnjeDoba)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Potvrdi" class="btn btn-default" /> |
+                @Html.ActionLink("Natrag na popis", "Index")
+            </div>
+        }
+    </div>
+}
+else
+{
+    <h3>Da li ste sigurni da želite koristiti ovaj stroj?</h3>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Naziv)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Naziv)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Marka)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Marka)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Model)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Model)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Svrha)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Svrha)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GodisnjeDoba)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GodisnjeDoba)
+            </dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Potvrdi" class="btn btn-default" /> |
+                @Html.ActionLink("Natrag na popis", "Index")
+            </div>
+        }
+    </div>
+}

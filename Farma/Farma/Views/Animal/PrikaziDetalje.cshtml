@@ -1,0 +1,54 @@
+﻿@model Farma.Models.Stoka
+@{
+    ViewBag.Title = "Detalji";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Vrsta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vrsta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Starost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Starost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tezina)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tezina)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nadimak)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nadimak)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Boja)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Boja)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Uredi zivotinju", "UrediZivotinju", new { id = Model.ID }) |
+    @Html.ActionLink("Natrag na popis", "Index")
+</p>
